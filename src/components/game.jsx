@@ -7,15 +7,24 @@ export default class Game extends Component {
     btn_text: ["_", "_", "_", "_", "_", "_", "_", "_", "_"],
     dashboard: "tea tac toe",
     current_player: 1,
+    winner: 0,
   };
 
   render() {
     return (
       <div className="game-container">
-        <div className="dashboard">
+        <div
+          className={
+            this.state.winner === 1
+              ? "dashboard p1"
+              : this.state.winner === 2
+              ? "dashboard p2"
+              : "dashboard"
+          }
+        >
           <h1>{this.state.dashboard}</h1>
         </div>
-        {/* <div className="game">
+        <div className="game-row">
           {this.state.btn_text.map((btn, index) => (
             <button
               name={index}
@@ -24,9 +33,9 @@ export default class Game extends Component {
               type="button"
               className={
                 this.state.btn_text[index] === "x"
-                  ? "btn btn-lg btn-secondary btn-p1"
+                  ? "btn btn-lg btn-secondary p1"
                   : this.state.btn_text[index] === "o"
-                  ? "btn btn-lg btn-secondary btn-p2"
+                  ? "btn btn-lg btn-secondary p2"
                   : "btn btn-lg btn-secondary "
               }
               disabled={
@@ -40,88 +49,6 @@ export default class Game extends Component {
               {btn}
             </button>
           ))}
-        </div> */}
-        <div className="game-row">
-          <button
-            onClick={() => this.handlePressed(0)}
-            type="button"
-            className={
-              this.state.btn_text[0] === "x"
-                ? "btn btn-lg btn-secondary btn-p1"
-                : this.state.btn_text[0] === "o"
-                ? "btn btn-lg btn-secondary btn-p2"
-                : "btn btn-lg btn-secondary "
-            }
-            disabled={
-              this.state.btn_text[0] === "x"
-                ? true
-                : this.state.btn_text[0] === "o"
-                ? true
-                : false
-            }
-          >
-            {this.state.btn_text[0]}
-          </button>
-          <button
-            onClick={() => this.handlePressed(1)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[1]}
-          </button>
-          <button
-            onClick={() => this.handlePressed(2)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[2]}
-          </button>
-        </div>
-        <div className="game-row">
-          <button
-            onClick={() => this.handlePressed(3)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[3]}
-          </button>
-          <button
-            onClick={() => this.handlePressed(4)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[4]}
-          </button>
-          <button
-            onClick={() => this.handlePressed(5)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[5]}
-          </button>
-        </div>
-        <div className="game-row">
-          <button
-            onClick={() => this.handlePressed(6)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[6]}
-          </button>
-          <button
-            onClick={() => this.handlePressed(7)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[7]}
-          </button>
-          <button
-            onClick={() => this.handlePressed(8)}
-            type="button"
-            className="btn btn-lg btn-secondary"
-          >
-            {this.state.btn_text[8]}
-          </button>
         </div>
         <div className="reset-game">
           <h3 onClick={this.handleReset} className="cursor">
@@ -142,7 +69,8 @@ export default class Game extends Component {
     let btn_text = ["_", "_", "_", "_", "_", "_", "_", "_", "_"];
     let dashboard = "tea tac toe...";
     let current_player = 1;
-    this.setState({ p1, p2, btn_text, dashboard, current_player });
+    let winner = 0;
+    this.setState({ p1, p2, btn_text, dashboard, current_player, winner });
   };
 
   handlePressed = (btn_pos) => {
@@ -167,10 +95,12 @@ export default class Game extends Component {
     console.log(current_player === 1 ? p2 : p1);
     //next, check if someone has won
     this.handleWin(btn_pos);
+    //next, check if stalemate
+    this.handleStalemate();
   };
 
   handleWin(btn_pos) {
-    let { p1, p2, dashboard, current_player } = this.state;
+    let { p1, p2, dashboard, current_player, winner } = this.state;
     let array_of_pos = current_player === 1 ? p1 : p2;
     console.log("reached check win fn()" + btn_pos);
     let win = false;
@@ -270,8 +200,18 @@ export default class Game extends Component {
     }
     console.log("setting the state");
     if (win) {
-      dashboard = "WINNER! Player " + current_player + " has won!";
-      this.setState({ dashboard });
+      dashboard = "Player " + current_player + " has won!";
+      winner = current_player;
+      this.setState({ dashboard, winner });
+    }
+  }
+
+  handleStalemate() {
+    if (this.state.btn_text.includes("_") && this.state.winner === 0) {
+      console.log("game still going");
+    } else {
+      console.log("game ended in a stalemate");
+      this.setState({ dashboard: "Nobody won." });
     }
   }
 }

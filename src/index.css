@@ -5,12 +5,16 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+:root {
+  --longest: 12vh;
+}
+
 body {
   background-color: #333333;
   color: gray;
   margin: 0;
   /* width: 300px; */
-  border: 2px solid red;
+  /* border: 2px solid red; */
 
   display: flex;
   flex-direction: column;
@@ -32,14 +36,18 @@ button {
   cursor: pointer;
 }
 
-.dashboard {
-  color: bisque;
+.game-row {
+  width: 36vh;
 }
 
-.btn-p1 {
+.dashboard {
+  /* color: bisque; */
+}
+
+.p1 {
   color: turquoise;
 }
 
-.btn-p2 {
-  color: orange;
+.p2 {
+  color: rgb(255, 102, 0);
 }
