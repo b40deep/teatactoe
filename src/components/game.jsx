@@ -67,7 +67,7 @@ export default class Game extends Component {
     let p1 = [];
     let p2 = [];
     let btn_text = ["_", "_", "_", "_", "_", "_", "_", "_", "_"];
-    let dashboard = "tea tac toe...";
+    let dashboard = "tea tac toe";
     let current_player = 1;
     let winner = 0;
     this.setState({ p1, p2, btn_text, dashboard, current_player, winner });
