@@ -1,0 +1,45 @@
+html {
+  font-family: "Ubuntu", "Segoe UI", "Roboto", "Oxygen", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: #333333;
+  color: gray;
+  margin: 0;
+  /* width: 300px; */
+  border: 2px solid red;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  background-color: #333333;
+  color: gray;
+  /* width: 2em;
+  height: 2em; */
+  width: 12vh;
+  height: 12vh;
+  font-size: xx-large;
+}
+
+.cursor {
+  cursor: pointer;
+}
+
+.dashboard {
+  color: bisque;
+}
+
+.btn-p1 {
+  color: turquoise;
+}
+
+.btn-p2 {
+  color: orange;
+}
