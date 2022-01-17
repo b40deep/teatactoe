@@ -1,4 +1,4 @@
-# Tea Tac Toa in React
+# TeaTacToe in React
 
 I was playing tictactoe with Tea over the phone and that night, I thought I'd try build it online so it'd be easier for us to play. The initial working prototype took me from 9pm to 2am. I'm adding fixes and optimizations as I can.
 
